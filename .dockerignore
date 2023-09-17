@@ -1,0 +1,26 @@
+# Ignore node modules, as they will be installed in the container
+node_modules
+
+# Ignore any logs
+*.log
+
+# Ignore the .env file to prevent sensitive data from being added to the image
+.env
+
+# Ignore any local configuration or cache files
+.npmrc
+npm-debug.log
+
+# Ignore any test or development files
+test/
+coverage/
+*.test.js
+*.spec.js
+
+# Ignore any editor/IDE specific files
+.vscode/
+.idea/
+
+# Ignore any OS generated files
+.DS_Store
+Thumbs.db
