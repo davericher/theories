@@ -83,18 +83,18 @@ Brief instructions on how to use the application, any available scripts, etc.
 
 Stores individual user information.
 
-| Field           | Type      | Description |
-|-----------------|-----------|-------------|
-| id              | Integer   | Primary key. |
-| username        | String    | Unique username. |
-| email           | String    | Unique email address. |
-| password        | String    | Hashed password for authentication. |
-| first_name      | String    | Optional first name. |
-| last_name       | String    | Optional last name. |
+| Field           | Type      | Description                            |
+| --------------- | --------- | -------------------------------------- |
+| id              | Integer   | Primary key.                           |
+| username        | String    | Unique username.                       |
+| email           | String    | Unique email address.                  |
+| password        | String    | Hashed password for authentication.    |
+| first_name      | String    | Optional first name.                   |
+| last_name       | String    | Optional last name.                    |
 | profile_picture | String    | Optional URL or path to profile image. |
-| created_at      | Timestamp | Creation timestamp. |
-| updated_at      | Timestamp | Last update timestamp. |
-| deleted_at      | Timestamp | Soft delete timestamp. |
+| created_at      | Timestamp | Creation timestamp.                    |
+| updated_at      | Timestamp | Last update timestamp.                 |
+| deleted_at      | Timestamp | Soft delete timestamp.                 |
 
 ### Relationships
 
@@ -108,12 +108,12 @@ Stores individual user information.
 
 Stores theories and their details.
 
-| Field       | Type      | Description |
-|-------------|-----------|-------------|
-| id          | Integer   | Primary key. |
-| title       | String    | Theory title. |
-| description | Text      | Detailed description of the theory. |
-| userId      | Integer   | Foreign key to the authoring user. |
+| Field       | Type    | Description                         |
+| ----------- | ------- | ----------------------------------- |
+| id          | Integer | Primary key.                        |
+| title       | String  | Theory title.                       |
+| description | Text    | Detailed description of the theory. |
+| userId      | Integer | Foreign key to the authoring user.  |
 
 ### Relationships
 
@@ -128,11 +128,11 @@ Stores theories and their details.
 
 Stores available roles in the system.
 
-| Field       | Type      | Description |
-|-------------|-----------|-------------|
-| id          | Integer   | Primary key. |
-| name        | String    | Unique role name. |
-| description | Text      | Role description. |
+| Field       | Type    | Description       |
+| ----------- | ------- | ----------------- |
+| id          | Integer | Primary key.      |
+| name        | String  | Unique role name. |
+| description | Text    | Role description. |
 
 ### Relationships
 
@@ -145,11 +145,11 @@ Stores available roles in the system.
 
 Stores available groups in the system.
 
-| Field       | Type      | Description |
-|-------------|-----------|-------------|
-| id          | Integer   | Primary key. |
-| name        | String    | Unique group name. |
-| description | Text      | Group description. |
+| Field       | Type    | Description        |
+| ----------- | ------- | ------------------ |
+| id          | Integer | Primary key.       |
+| name        | String  | Unique group name. |
+| description | Text    | Group description. |
 
 ### Relationships
 
@@ -162,10 +162,10 @@ Stores available groups in the system.
 
 Junction table for users and roles.
 
-| Field   | Type    | Description |
-|---------|---------|-------------|
-| userId  | Integer | Foreign key to `Users`. |
-| roleId  | Integer | Foreign key to `Roles`. |
+| Field  | Type    | Description             |
+| ------ | ------- | ----------------------- |
+| userId | Integer | Foreign key to `Users`. |
+| roleId | Integer | Foreign key to `Roles`. |
 
 ---
 
@@ -173,9 +173,9 @@ Junction table for users and roles.
 
 Junction table for users and groups.
 
-| Field   | Type    | Description |
-|---------|---------|-------------|
-| userId  | Integer | Foreign key to `Users`. |
+| Field   | Type    | Description              |
+| ------- | ------- | ------------------------ |
+| userId  | Integer | Foreign key to `Users`.  |
 | groupId | Integer | Foreign key to `Groups`. |
 
 ---
@@ -184,10 +184,10 @@ Junction table for users and groups.
 
 Junction table for groups and roles.
 
-| Field   | Type    | Description |
-|---------|---------|-------------|
+| Field   | Type    | Description              |
+| ------- | ------- | ------------------------ |
 | groupId | Integer | Foreign key to `Groups`. |
-| roleId  | Integer | Foreign key to `Roles`. |
+| roleId  | Integer | Foreign key to `Roles`.  |
 
 ---
 
@@ -195,9 +195,9 @@ Junction table for groups and roles.
 
 Junction table for theories and disciplines.
 
-| Field      | Type    | Description |
-|------------|---------|-------------|
-| theoryId   | Integer | Foreign key to `Theories`. |
+| Field        | Type    | Description                   |
+| ------------ | ------- | ----------------------------- |
+| theoryId     | Integer | Foreign key to `Theories`.    |
 | disciplineId | Integer | Foreign key to `Disciplines`. |
 
 ---
@@ -206,10 +206,10 @@ Junction table for theories and disciplines.
 
 Stores various disciplines related to theories.
 
-| Field       | Type      | Description |
-|-------------|-----------|-------------|
-| id          | Integer   | Primary key. |
-| name        | String    | Unique discipline name. |
+| Field | Type    | Description             |
+| ----- | ------- | ----------------------- |
+| id    | Integer | Primary key.            |
+| name  | String  | Unique discipline name. |
 
 ### Relationships
 
@@ -221,11 +221,11 @@ Stores various disciplines related to theories.
 
 Stores files or links attached to theories.
 
-| Field      | Type      | Description |
-|------------|-----------|-------------|
-| id         | Integer   | Primary key. |
-| theoryId   | Integer   | Foreign key to `Theories`. |
-| fileLink   | String    | URL or path to the attachment. |
+| Field    | Type    | Description                    |
+| -------- | ------- | ------------------------------ |
+| id       | Integer | Primary key.                   |
+| theoryId | Integer | Foreign key to `Theories`.     |
+| fileLink | String  | URL or path to the attachment. |
 
 ---
 
@@ -233,12 +233,12 @@ Stores files or links attached to theories.
 
 Stores version history for theories.
 
-| Field      | Type      | Description |
-|------------|-----------|-------------|
-| id         | Integer   | Primary key. |
-| theoryId   | Integer   | Foreign key to `Theories`. |
-| version    | String    | Version identifier. |
-| changes    | Text      | Description of changes in this version. |
+| Field    | Type    | Description                             |
+| -------- | ------- | --------------------------------------- |
+| id       | Integer | Primary key.                            |
+| theoryId | Integer | Foreign key to `Theories`.              |
+| version  | String  | Version identifier.                     |
+| changes  | Text    | Description of changes in this version. |
 
 ---
 
@@ -246,10 +246,10 @@ Stores version history for theories.
 
 Stores tags that can be associated with theories.
 
-| Field      | Type      | Description |
-|------------|-----------|-------------|
-| id         | Integer   | Primary key. |
-| name       | String    | Unique tag name. |
+| Field | Type    | Description      |
+| ----- | ------- | ---------------- |
+| id    | Integer | Primary key.     |
+| name  | String  | Unique tag name. |
 
 ### Relationships
 
@@ -261,10 +261,10 @@ Stores tags that can be associated with theories.
 
 Junction table for theories and tags.
 
-| Field   | Type    | Description |
-|---------|---------|-------------|
-| theoryId| Integer | Foreign key to `Theories`. |
-| tagId   | Integer | Foreign key to `Tags`. |
+| Field    | Type    | Description                |
+| -------- | ------- | -------------------------- |
+| theoryId | Integer | Foreign key to `Theories`. |
+| tagId    | Integer | Foreign key to `Tags`.     |
 
 ---
 
@@ -272,12 +272,12 @@ Junction table for theories and tags.
 
 Stores evidence supporting or refuting theories.
 
-| Field      | Type      | Description |
-|------------|-----------|-------------|
-| id         | Integer   | Primary key. |
-| theoryId   | Integer   | Foreign key to `Theories`. |
-| description| Text      | Description of the evidence. |
-| type       | String    | Type of evidence (supporting/refuting). |
+| Field       | Type    | Description                             |
+| ----------- | ------- | --------------------------------------- |
+| id          | Integer | Primary key.                            |
+| theoryId    | Integer | Foreign key to `Theories`.              |
+| description | Text    | Description of the evidence.            |
+| type        | String  | Type of evidence (supporting/refuting). |
 
 ---
 
@@ -285,10 +285,10 @@ Stores evidence supporting or refuting theories.
 
 Stores critics who critique theories.
 
-| Field      | Type      | Description |
-|------------|-----------|-------------|
-| id         | Integer   | Primary key. |
-| name       | String    | Critic's name. |
+| Field | Type    | Description    |
+| ----- | ------- | -------------- |
+| id    | Integer | Primary key.   |
+| name  | String  | Critic's name. |
 
 ---
 
@@ -296,12 +296,12 @@ Stores critics who critique theories.
 
 Stores critiques made by critics on theories.
 
-| Field      | Type      | Description |
-|------------|-----------|-------------|
-| id         | Integer   | Primary key. |
-| criticId   | Integer   | Foreign key to `Critics`. |
-| theoryId   | Integer   | Foreign key to `Theories`. |
-| critique   | Text      | The critique content. |
+| Field    | Type    | Description                |
+| -------- | ------- | -------------------------- |
+| id       | Integer | Primary key.               |
+| criticId | Integer | Foreign key to `Critics`.  |
+| theoryId | Integer | Foreign key to `Theories`. |
+| critique | Text    | The critique content.      |
 
 ---
 
@@ -309,13 +309,13 @@ Stores critiques made by critics on theories.
 
 Stores access control rules for users.
 
-| Field      | Type      | Description |
-|------------|-----------|-------------|
-| id         | Integer   | Primary key. |
-| userId     | Integer   | Foreign key to `Users`. |
-| permission | String    | Type of permission (e.g., read, write, delete). |
-| entity     | String    | Entity to which the permission applies (e.g., theory, critique). |
-| entityId   | Integer   | Specific ID of the entity, if applicable. |
+| Field      | Type    | Description                                                      |
+| ---------- | ------- | ---------------------------------------------------------------- |
+| id         | Integer | Primary key.                                                     |
+| userId     | Integer | Foreign key to `Users`.                                          |
+| permission | String  | Type of permission (e.g., read, write, delete).                  |
+| entity     | String  | Entity to which the permission applies (e.g., theory, critique). |
+| entityId   | Integer | Specific ID of the entity, if applicable.                        |
 
 ### Relationships
 
@@ -327,17 +327,16 @@ Stores access control rules for users.
 
 Logs user activities in the system.
 
-| Field      | Type      | Description |
-|------------|-----------|-------------|
-| id         | Integer   | Primary key. |
-| userId     | Integer   | Foreign key to `Users`. |
-| activity   | Text      | Description of the activity. |
-| timestamp  | Timestamp | When the activity occurred. |
+| Field     | Type      | Description                  |
+| --------- | --------- | ---------------------------- |
+| id        | Integer   | Primary key.                 |
+| userId    | Integer   | Foreign key to `Users`.      |
+| activity  | Text      | Description of the activity. |
+| timestamp | Timestamp | When the activity occurred.  |
 
 ### Relationships
 
 - **Users**: Many-to-one relationship. Each activity log entry is associated with one user.
-
 
 ## API Endpoints
 
