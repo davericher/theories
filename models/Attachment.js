@@ -1,48 +1,34 @@
-const db = require('knex')(require('../knexfile').development);
+const knex = require('knex')(require('../knexfile').development);
 
-class TheoryDiscipline {
-  // Basic CRUD
-  static findAll() {
-    return db('theoryDiscipline');
+const tableName = 'attachment';
+
+class Attachment {
+  // Create a new attachment
+  static async create(theoryId, fileLink) {
+    return knex(tableName).insert({ theoryId, fileLink });
   }
 
-  static findById(id) {
-    return db('theoryDiscipline').where({ id }).first();
+  // Retrieve all attachments for a specific theory
+  static async findByTheoryId(theoryId) {
+    return knex(tableName).where({ theoryId });
   }
 
-  static create(theoryDiscipline) {
-    return db('theoryDiscipline').insert(theoryDiscipline).returning('*');
+  // Retrieve a specific attachment by its ID
+  static async findById(attachmentId) {
+    return knex(tableName).where({ id: attachmentId }).first();
   }
 
-  static delete(id) {
-    return db('theoryDiscipline').where({ id }).del();
+  // Update an attachment's file link
+  static async update(attachmentId, newFileLink) {
+    return knex(tableName)
+      .where({ id: attachmentId })
+      .update({ fileLink: newFileLink });
   }
 
-  // Relationships
-  static findTheory(theoryDisciplineId) {
-    return db('theoryDiscipline')
-      .join('theories', 'theoryDiscipline.theoryId', 'theories.id')
-      .where('theoryDiscipline.id', theoryDisciplineId)
-      .select('theories.*')
-      .first();
-  }
-
-  static findDiscipline(theoryDisciplineId) {
-    return db('theoryDiscipline')
-      .join('discipline', 'theoryDiscipline.disciplineId', 'discipline.id')
-      .where('theoryDiscipline.id', theoryDisciplineId)
-      .select('discipline.*')
-      .first();
-  }
-
-  // Convenience functions
-  static findByTheoryId(theoryId) {
-    return db('theoryDiscipline').where({ theoryId });
-  }
-
-  static findByDisciplineId(disciplineId) {
-    return db('theoryDiscipline').where({ disciplineId });
+  // Delete an attachment
+  static async delete(attachmentId) {
+    return knex(tableName).where({ id: attachmentId }).del();
   }
 }
 
-module.exports = TheoryDiscipline;
+module.exports = Attachment;
