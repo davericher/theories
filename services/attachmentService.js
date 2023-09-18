@@ -4,8 +4,7 @@ const Attachment = require('../models/Attachment');
 class AttachmentService {
   static async createAttachment(data) {
     try {
-      const attachmentId = await Attachment.query(knex).insert(data);
-      return attachmentId;
+      return await Attachment.query(knex).insert(data);
     } catch (error) {
       console.error('Error creating attachment:', error);
       throw error;
@@ -14,8 +13,7 @@ class AttachmentService {
 
   static async getAttachmentById(id) {
     try {
-      const attachment = await Attachment.query(knex).findById(id);
-      return attachment;
+      return await Attachment.query(knex).findById(id);
     } catch (error) {
       console.error('Error fetching attachment:', error);
       throw error;
@@ -24,11 +22,7 @@ class AttachmentService {
 
   static async updateAttachment(id, data) {
     try {
-      const updatedAttachment = await Attachment.query(knex).patchAndFetchById(
-        id,
-        data,
-      );
-      return updatedAttachment;
+      return await Attachment.query(knex).patchAndFetchById(id, data);
     } catch (error) {
       console.error('Error updating attachment:', error);
       throw error;
@@ -37,8 +31,7 @@ class AttachmentService {
 
   static async deleteAttachment(id) {
     try {
-      const rowsDeleted = await Attachment.query(knex).deleteById(id);
-      return rowsDeleted;
+      return await Attachment.query(knex).deleteById(id);
     } catch (error) {
       console.error('Error deleting attachment:', error);
       throw error;

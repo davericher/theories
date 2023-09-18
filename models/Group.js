@@ -23,17 +23,17 @@ class Group {
 
   // Get users associated with a group
   static getUsersByGroupId(groupId) {
-    return db('user_groups')
-      .join('users', 'user_groups.userId', 'users.id')
-      .where('user_groups.groupId', groupId)
+    return db('userGroups')
+      .join('users', 'userGroups.userId', 'users.id')
+      .where('userGroups.groupId', groupId)
       .select('users.*');
   }
 
   // Get roles associated with a group
   static getRolesByGroupId(groupId) {
-    return db('group_roles')
-      .join('roles', 'group_roles.roleId', 'roles.id')
-      .where('group_roles.groupId', groupId)
+    return db('groupRoles')
+      .join('roles', 'groupRoles.roleId', 'roles.id')
+      .where('groupRoles.groupId', groupId)
       .select('roles.*');
   }
 }

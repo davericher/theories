@@ -4,8 +4,7 @@ const UserActivityLog = require('../models/UserActivityLog');
 class UserActivityLogService {
   static async createUserActivityLog(data) {
     try {
-      const logId = await UserActivityLog.query(knex).insert(data);
-      return logId;
+      return await UserActivityLog.query(knex).insert(data);
     } catch (error) {
       console.error('Error creating user activity log:', error);
       throw error;
@@ -14,8 +13,7 @@ class UserActivityLogService {
 
   static async getUserActivityLogById(id) {
     try {
-      const log = await UserActivityLog.query(knex).findById(id);
-      return log;
+      return await UserActivityLog.query(knex).findById(id);
     } catch (error) {
       console.error('Error fetching user activity log:', error);
       throw error;
@@ -24,11 +22,7 @@ class UserActivityLogService {
 
   static async updateUserActivityLog(id, data) {
     try {
-      const updatedLog = await UserActivityLog.query(knex).patchAndFetchById(
-        id,
-        data,
-      );
-      return updatedLog;
+      return await UserActivityLog.query(knex).patchAndFetchById(id, data);
     } catch (error) {
       console.error('Error updating user activity log:', error);
       throw error;
@@ -37,8 +31,7 @@ class UserActivityLogService {
 
   static async deleteUserActivityLog(id) {
     try {
-      const rowsDeleted = await UserActivityLog.query(knex).deleteById(id);
-      return rowsDeleted;
+      return await UserActivityLog.query(knex).deleteById(id);
     } catch (error) {
       console.error('Error deleting user activity log:', error);
       throw error;

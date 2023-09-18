@@ -1,13 +1,10 @@
 const knex = require('knex')(require('../knexfile').development);
 const UserFavorites = require('../models/UserFavorites');
 
-// TODO
-
 class UserFavoritesService {
   static async createUserFavorite(data) {
     try {
-      const userFavoriteId = await UserFavorites.query(knex).insert(data);
-      return userFavoriteId;
+      return await UserFavorites.query(knex).insert(data);
     } catch (error) {
       console.error('Error creating user favorite:', error);
       throw error;
@@ -16,8 +13,7 @@ class UserFavoritesService {
 
   static async getUserFavoriteById(id) {
     try {
-      const userFavorite = await UserFavorites.query(knex).findById(id);
-      return userFavorite;
+      return await UserFavorites.query(knex).findById(id);
     } catch (error) {
       console.error('Error fetching user favorite:', error);
       throw error;
@@ -26,10 +22,7 @@ class UserFavoritesService {
 
   static async updateUserFavorite(id, data) {
     try {
-      const updatedUserFavorite = await UserFavorites.query(
-        knex,
-      ).patchAndFetchById(id, data);
-      return updatedUserFavorite;
+      return await UserFavorites.query(knex).patchAndFetchById(id, data);
     } catch (error) {
       console.error('Error updating user favorite:', error);
       throw error;
@@ -38,8 +31,7 @@ class UserFavoritesService {
 
   static async deleteUserFavorite(id) {
     try {
-      const rowsDeleted = await UserFavorites.query(knex).deleteById(id);
-      return rowsDeleted;
+      return await UserFavorites.query(knex).deleteById(id);
     } catch (error) {
       console.error('Error deleting user favorite:', error);
       throw error;

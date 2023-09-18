@@ -4,8 +4,7 @@ const Theory = require('../models/Theory');
 class TheoryService {
   static async createTheory(data) {
     try {
-      const theoryId = await Theory.query(knex).insert(data);
-      return theoryId;
+      return await Theory.query(knex).insert(data);
     } catch (error) {
       console.error('Error creating theory:', error);
       throw error;
@@ -14,8 +13,7 @@ class TheoryService {
 
   static async getTheoryById(id) {
     try {
-      const theory = await Theory.query(knex).findById(id);
-      return theory;
+      return await Theory.query(knex).findById(id);
     } catch (error) {
       console.error('Error fetching theory:', error);
       throw error;
@@ -24,11 +22,7 @@ class TheoryService {
 
   static async updateTheory(id, data) {
     try {
-      const updatedTheory = await Theory.query(knex).patchAndFetchById(
-        id,
-        data,
-      );
-      return updatedTheory;
+      return await Theory.query(knex).patchAndFetchById(id, data);
     } catch (error) {
       console.error('Error updating theory:', error);
       throw error;
@@ -37,8 +31,7 @@ class TheoryService {
 
   static async deleteTheory(id) {
     try {
-      const rowsDeleted = await Theory.query(knex).deleteById(id);
-      return rowsDeleted;
+      return await Theory.query(knex).deleteById(id);
     } catch (error) {
       console.error('Error deleting theory:', error);
       throw error;

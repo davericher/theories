@@ -1,4 +1,4 @@
-exports.up = function (knex) {
+exports.up = (knex) => {
   return knex.schema.createTable('userActivityLog', (table) => {
     table.increments('id').primary();
     table
@@ -14,6 +14,6 @@ exports.up = function (knex) {
   });
 };
 
-exports.down = function (knex) {
+exports.down = (knex) => {
   return knex.schema.dropTable('userActivityLog');
 };

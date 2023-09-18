@@ -1,5 +1,4 @@
-const knex = require('../knexfile').development;
-const db = require('knex')(knex);
+const db = require('knex')(require('../knexfile').development);
 
 class Search {
   static theoriesByKeyword(keyword) {
@@ -17,8 +16,6 @@ class Search {
   static tagsByKeyword(keyword) {
     return db('tag').where('name', 'ilike', `%${keyword}%`);
   }
-
-  // ... Add more search methods for other entities as needed
 }
 
 module.exports = Search;

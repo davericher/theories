@@ -1,13 +1,10 @@
 const knex = require('knex')(require('../knexfile').development);
 const GroupRoles = require('../models/GroupRoles');
 
-// TODO
-
 class GroupRolesService {
   static async createGroupRole(data) {
     try {
-      const groupRoleId = await GroupRoles.query(knex).insert(data);
-      return groupRoleId;
+      return await GroupRoles.query(knex).insert(data);
     } catch (error) {
       console.error('Error creating group role:', error);
       throw error;
@@ -16,8 +13,7 @@ class GroupRolesService {
 
   static async getGroupRoleById(id) {
     try {
-      const groupRole = await GroupRoles.query(knex).findById(id);
-      return groupRole;
+      return await GroupRoles.query(knex).findById(id);
     } catch (error) {
       console.error('Error fetching group role:', error);
       throw error;
@@ -26,11 +22,7 @@ class GroupRolesService {
 
   static async updateGroupRole(id, data) {
     try {
-      const updatedGroupRole = await GroupRoles.query(knex).patchAndFetchById(
-        id,
-        data,
-      );
-      return updatedGroupRole;
+      return await GroupRoles.query(knex).patchAndFetchById(id, data);
     } catch (error) {
       console.error('Error updating group role:', error);
       throw error;
@@ -39,8 +31,7 @@ class GroupRolesService {
 
   static async deleteGroupRole(id) {
     try {
-      const rowsDeleted = await GroupRoles.query(knex).deleteById(id);
-      return rowsDeleted;
+      return await GroupRoles.query(knex).deleteById(id);
     } catch (error) {
       console.error('Error deleting group role:', error);
       throw error;

@@ -1,4 +1,4 @@
-exports.seed = function (knex) {
+exports.seed = (knex) => {
   return knex('critique')
     .del()
     .then(function () {

@@ -1,5 +1,4 @@
-const knex = require('../knexfile').development;
-const db = require('knex')(knex);
+const db = require('knex')(require('../knexfile').development);
 
 class TheoryTag {
   // Basic CRUD

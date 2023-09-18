@@ -1,5 +1,4 @@
-const knex = require('../knexfile').development;
-const db = require('knex')(knex);
+const db = require('knex')(require('../knexfile').development);
 
 class Notification {
   // Basic CRUD
@@ -36,6 +35,12 @@ class Notification {
     return db('notification')
       .where({ id: notificationId })
       .update({ readStatus: true });
+  }
+
+  static getUsers(notificationId) {
+    return db('users')
+      .join('userNotifications', 'users.id', '=', 'userNotifications.userId')
+      .where('userNotifications.notificationId', notificationId);
   }
 }
 

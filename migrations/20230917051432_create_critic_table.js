@@ -1,4 +1,4 @@
-exports.up = function (knex) {
+exports.up = (knex) => {
   return knex.schema.createTable('critic', (table) => {
     table.increments('id').primary();
     table.string('firstName').notNullable();
@@ -8,6 +8,6 @@ exports.up = function (knex) {
   });
 };
 
-exports.down = function (knex) {
+exports.down = (knex) => {
   return knex.schema.dropTable('critic');
 };

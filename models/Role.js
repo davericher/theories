@@ -23,9 +23,9 @@ class Role {
 
   // Get users associated with a role
   static getUsersByRoleId(roleId) {
-    return db('user_roles')
-      .join('users', 'user_roles.userId', 'users.id')
-      .where('user_roles.roleId', roleId)
+    return db('userRoles')
+      .join('users', 'userRoles.userId', 'users.id')
+      .where('userRoles.roleId', roleId)
       .select('users.*');
   }
 }

@@ -4,8 +4,7 @@ const Group = require('../models/Group');
 class GroupService {
   static async createGroup(data) {
     try {
-      const groupId = await Group.query(knex).insert(data);
-      return groupId;
+      return await Group.query(knex).insert(data);
     } catch (error) {
       console.error('Error creating group:', error);
       throw error;
@@ -14,8 +13,7 @@ class GroupService {
 
   static async getGroupById(id) {
     try {
-      const group = await Group.query(knex).findById(id);
-      return group;
+      return await Group.query(knex).findById(id);
     } catch (error) {
       console.error('Error fetching group:', error);
       throw error;
@@ -24,8 +22,7 @@ class GroupService {
 
   static async updateGroup(id, data) {
     try {
-      const updatedGroup = await Group.query(knex).patchAndFetchById(id, data);
-      return updatedGroup;
+      return await Group.query(knex).patchAndFetchById(id, data);
     } catch (error) {
       console.error('Error updating group:', error);
       throw error;
@@ -34,8 +31,7 @@ class GroupService {
 
   static async deleteGroup(id) {
     try {
-      const rowsDeleted = await Group.query(knex).deleteById(id);
-      return rowsDeleted;
+      return await Group.query(knex).deleteById(id);
     } catch (error) {
       console.error('Error deleting group:', error);
       throw error;

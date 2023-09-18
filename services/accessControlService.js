@@ -4,8 +4,7 @@ const AccessControl = require('../models/AccessControl');
 class AccessControlService {
   static async createAccessControl(data) {
     try {
-      const accessControlId = await AccessControl.query(knex).insert(data);
-      return accessControlId;
+      return await AccessControl.query(knex).insert(data);
     } catch (error) {
       console.error('Error creating access control:', error);
       throw error;
@@ -14,8 +13,7 @@ class AccessControlService {
 
   static async getAccessControlById(id) {
     try {
-      const accessControl = await AccessControl.query(knex).findById(id);
-      return accessControl;
+      return await AccessControl.query(knex).findById(id);
     } catch (error) {
       console.error('Error fetching access control:', error);
       throw error;
@@ -24,10 +22,7 @@ class AccessControlService {
 
   static async updateAccessControl(id, data) {
     try {
-      const updatedAccessControl = await AccessControl.query(
-        knex,
-      ).patchAndFetchById(id, data);
-      return updatedAccessControl;
+      return await AccessControl.query(knex).patchAndFetchById(id, data);
     } catch (error) {
       console.error('Error updating access control:', error);
       throw error;
@@ -36,8 +31,7 @@ class AccessControlService {
 
   static async deleteAccessControl(id) {
     try {
-      const rowsDeleted = await AccessControl.query(knex).deleteById(id);
-      return rowsDeleted;
+      return await AccessControl.query(knex).deleteById(id);
     } catch (error) {
       console.error('Error deleting access control:', error);
       throw error;

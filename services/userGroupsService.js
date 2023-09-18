@@ -1,8 +1,6 @@
 const knex = require('knex')(require('../knexfile').development);
 const UserGroups = require('../models/UserGroups');
 
-// TODO
-
 class UserGroupsService {
   static async createUserGroup(data) {
     try {

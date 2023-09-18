@@ -1,34 +1,32 @@
-const knex = require('../knexfile').development;
-const db = require('knex')(knex);
+const db = require('knex')(require('../knexfile').development);
+
+const tableName = 'versionHistory';
 
 class VersionHistory {
   // Basic CRUD
   static findAll() {
-    return db('versionHistory');
+    return db(tableName);
   }
 
   static findById(id) {
-    return db('versionHistory').where({ id }).first();
+    return db(tableName).where({ id }).first();
   }
 
   static create(versionHistory) {
-    return db('versionHistory').insert(versionHistory).returning('*');
+    return db(tableName).insert(versionHistory).returning('*');
   }
 
   static update(id, versionHistory) {
-    return db('versionHistory')
-      .where({ id })
-      .update(versionHistory)
-      .returning('*');
+    return db(tableName).where({ id }).update(versionHistory).returning('*');
   }
 
   static delete(id) {
-    return db('versionHistory').where({ id }).del();
+    return db(tableName).where({ id }).del();
   }
 
   // Relationships
   static findTheory(versionHistoryId) {
-    return db('versionHistory')
+    return db(tableName)
       .join('theories', 'versionHistory.theoryId', 'theories.id')
       .where('versionHistory.id', versionHistoryId)
       .select('theories.*')
@@ -37,11 +35,11 @@ class VersionHistory {
 
   // Convenience functions
   static findByTheoryId(theoryId) {
-    return db('versionHistory').where({ theoryId });
+    return db(tableName).where({ theoryId });
   }
 
   static findLatestVersion(theoryId) {
-    return db('versionHistory')
+    return db(tableName)
       .where({ theoryId })
       .orderBy('versionNumber', 'desc')
       .first();

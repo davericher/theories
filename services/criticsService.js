@@ -4,8 +4,7 @@ const Critics = require('../models/Critic');
 class CriticsService {
   static async createCritics(data) {
     try {
-      const criticsId = await Critics.query(knex).insert(data);
-      return criticsId;
+      return await Critics.query(knex).insert(data);
     } catch (error) {
       console.error('Error creating critics:', error);
       throw error;
@@ -14,8 +13,7 @@ class CriticsService {
 
   static async getCriticsById(id) {
     try {
-      const critics = await Critics.query(knex).findById(id);
-      return critics;
+      return await Critics.query(knex).findById(id);
     } catch (error) {
       console.error('Error fetching critics:', error);
       throw error;
@@ -24,11 +22,7 @@ class CriticsService {
 
   static async updateCritics(id, data) {
     try {
-      const updatedCritics = await Critics.query(knex).patchAndFetchById(
-        id,
-        data,
-      );
-      return updatedCritics;
+      return await Critics.query(knex).patchAndFetchById(id, data);
     } catch (error) {
       console.error('Error updating critics:', error);
       throw error;
@@ -37,8 +31,7 @@ class CriticsService {
 
   static async deleteCritics(id) {
     try {
-      const rowsDeleted = await Critics.query(knex).deleteById(id);
-      return rowsDeleted;
+      return await Critics.query(knex).deleteById(id);
     } catch (error) {
       console.error('Error deleting critics:', error);
       throw error;

@@ -1,5 +1,4 @@
-const knex = require('../knexfile').development;
-const db = require('knex')(knex);
+const db = require('knex')(require('../knexfile').development);
 
 class User {
   // Basic CRUD
@@ -56,38 +55,49 @@ class User {
   }
 
   static getRolesByUserId(userId) {
-    return knex('user_roles')
-      .join('roles', 'user_roles.roleId', 'roles.id')
-      .where('user_roles.userId', userId)
+    return db('userRoles')
+      .join('roles', 'userRoles.roleId', 'roles.id')
+      .where('userRoles.userId', userId)
       .select('roles.*');
   }
 
   // Get groups associated with a user
   static getGroupsByUserId(userId) {
-    return knex('user_groups')
-      .join('groups', 'user_groups.groupId', 'groups.id')
-      .where('user_groups.userId', userId)
+    return db('userGroups')
+      .join('groups', 'userGroups.groupId', 'groups.id')
+      .where('userGroups.userId', userId)
       .select('groups.*');
   }
 
   // Assign a role to a user
   static assignRoleToUser(userId, roleId) {
-    return knex('user_roles').insert({ userId, roleId });
+    return db('userRoles').insert({ userId, roleId });
   }
 
   // Remove a role from a user
   static removeRoleFromUser(userId, roleId) {
-    return knex('user_roles').where({ userId, roleId }).del();
+    return db('userRoles').where({ userId, roleId }).del();
   }
 
   // Add a user to a group
   static addUserToGroup(userId, groupId) {
-    return knex('user_groups').insert({ userId, groupId });
+    return db('userGroups').insert({ userId, groupId });
   }
 
   // Remove a user from a group
   static removeUserFromGroup(userId, groupId) {
-    return knex('user_groups').where({ userId, groupId }).del();
+    return db('userGroups').where({ userId, groupId }).del();
+  }
+
+  static async getNotifications(userId) {
+    return db('notifications')
+      .join(
+        'userNotifications',
+        'notifications.id',
+        '=',
+        'userNotifications.notificationId',
+      )
+      .where('userNotifications.userId', userId);
   }
 }
 

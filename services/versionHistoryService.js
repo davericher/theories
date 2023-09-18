@@ -4,8 +4,7 @@ const VersionHistory = require('../models/VersionHistory');
 class VersionHistoryService {
   static async createVersionHistory(data) {
     try {
-      const versionHistoryId = await VersionHistory.query(knex).insert(data);
-      return versionHistoryId;
+      return await VersionHistory.query(knex).insert(data);
     } catch (error) {
       console.error('Error creating version history:', error);
       throw error;
@@ -14,8 +13,7 @@ class VersionHistoryService {
 
   static async getVersionHistoryById(id) {
     try {
-      const versionHistory = await VersionHistory.query(knex).findById(id);
-      return versionHistory;
+      return await VersionHistory.query(knex).findById(id);
     } catch (error) {
       console.error('Error fetching version history:', error);
       throw error;
@@ -24,10 +22,7 @@ class VersionHistoryService {
 
   static async updateVersionHistory(id, data) {
     try {
-      const updatedVersionHistory = await VersionHistory.query(
-        knex,
-      ).patchAndFetchById(id, data);
-      return updatedVersionHistory;
+      return await VersionHistory.query(knex).patchAndFetchById(id, data);
     } catch (error) {
       console.error('Error updating version history:', error);
       throw error;
@@ -36,8 +31,7 @@ class VersionHistoryService {
 
   static async deleteVersionHistory(id) {
     try {
-      const rowsDeleted = await VersionHistory.query(knex).deleteById(id);
-      return rowsDeleted;
+      return await VersionHistory.query(knex).deleteById(id);
     } catch (error) {
       console.error('Error deleting version history:', error);
       throw error;

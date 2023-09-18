@@ -1,5 +1,5 @@
-exports.up = function (knex) {
-  return knex.schema.createTable('user_groups', (table) => {
+exports.up = (knex) => {
+  return knex.schema.createTable('userGroups', (table) => {
     table
       .integer('userId')
       .unsigned()
@@ -16,6 +16,6 @@ exports.up = function (knex) {
   });
 };
 
-exports.down = function (knex) {
-  return knex.schema.dropTable('user_groups');
+exports.down = (knex) => {
+  return knex.schema.dropTable('userGroups');
 };

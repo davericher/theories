@@ -4,8 +4,7 @@ const Evidence = require('../models/Evidence');
 class EvidenceService {
   static async createEvidence(data) {
     try {
-      const evidenceId = await Evidence.query(knex).insert(data);
-      return evidenceId;
+      return await Evidence.query(knex).insert(data);
     } catch (error) {
       console.error('Error creating evidence:', error);
       throw error;
@@ -14,8 +13,7 @@ class EvidenceService {
 
   static async getEvidenceById(id) {
     try {
-      const evidence = await Evidence.query(knex).findById(id);
-      return evidence;
+      return await Evidence.query(knex).findById(id);
     } catch (error) {
       console.error('Error fetching evidence:', error);
       throw error;
@@ -24,11 +22,7 @@ class EvidenceService {
 
   static async updateEvidence(id, data) {
     try {
-      const updatedEvidence = await Evidence.query(knex).patchAndFetchById(
-        id,
-        data,
-      );
-      return updatedEvidence;
+      return await Evidence.query(knex).patchAndFetchById(id, data);
     } catch (error) {
       console.error('Error updating evidence:', error);
       throw error;
@@ -37,8 +31,7 @@ class EvidenceService {
 
   static async deleteEvidence(id) {
     try {
-      const rowsDeleted = await Evidence.query(knex).deleteById(id);
-      return rowsDeleted;
+      return await Evidence.query(knex).deleteById(id);
     } catch (error) {
       console.error('Error deleting evidence:', error);
       throw error;
