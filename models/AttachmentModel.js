@@ -51,6 +51,10 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       fileType: DataTypes.STRING,
+      fileURL: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       uploadDate: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,

@@ -1,24 +1,29 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
-const process = require('process');
 
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require(`${__dirname}/../config/config.json`)[env];
 const db = {};
 
-let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(
-    config.database,
-    config.username,
-    config.password,
-    config,
-  );
-}
+// Load environment variables from .env file
+require('dotenv').config();
+
+// Database configuration from .env
+const dbConfig = {
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  dialect: 'postgres', // Assuming you're using PostgreSQL, adjust if needed
+};
+
+const sequelize = new Sequelize(
+  dbConfig.database,
+  dbConfig.username,
+  dbConfig.password,
+  dbConfig,
+);
 
 fs.readdirSync(__dirname)
   .filter((file) => {
@@ -30,6 +35,7 @@ fs.readdirSync(__dirname)
     );
   })
   .forEach((file) => {
+    // eslint-disable-next-line global-require,import/no-dynamic-require
     const model = require(path.join(__dirname, file))(
       sequelize,
       Sequelize.DataTypes,

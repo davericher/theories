@@ -71,7 +71,7 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: 'notifications',
+          model: 'notification',
           key: 'id',
         },
       },
@@ -89,7 +89,7 @@ module.exports = (sequelize) => {
     {
       sequelize,
       modelName: 'UserNotification',
-      tableName: 'userNotifications',
+      tableName: 'userNotification',
       underscored: true,
     },
   );

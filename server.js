@@ -3,6 +3,7 @@ const helmet = require('helmet'); // for setting security-related HTTP headers
 const morgan = require('morgan'); // for logging HTTP requests
 const cors = require('cors'); // for handling CORS
 const rateLimit = require('express-rate-limit'); // for basic rate limiting
+const db = require('./models'); // Importing the Sequelize models
 
 require('dotenv').config();
 
@@ -41,8 +42,10 @@ app.use((err, req, res) => {
   res.status(500).json({ error: 'Something went wrong!' });
 });
 
-// Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+// Sync the database models and then start the server
+db.sequelize.sync().then(() => {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
 });

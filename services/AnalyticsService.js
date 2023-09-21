@@ -1,9 +1,7 @@
-const { sequelize } = require('sequelize');
-const UserActivityLog = require('./UserActivityLogModel'); // Assuming you have a Sequelize model for UserActivityLog
-const Critique = require('./CritiqueModel'); // Assuming you have a Sequelize model for Critique
-const TheoryTag = require('./TheoryTagModel'); // Assuming you have a Sequelize model for TheoryTag
+const sequelize = require('sequelize');
+const { UserActivityLog, Critique, TheoryTag } = require('../models');
 
-class Analytics {
+class AnalyticsService {
   static async mostActiveUsers(limit = 10) {
     return UserActivityLog.findAll({
       attributes: [
@@ -46,4 +44,4 @@ class Analytics {
   // ... Add more analytics methods as needed
 }
 
-module.exports = Analytics;
+module.exports = AnalyticsService;

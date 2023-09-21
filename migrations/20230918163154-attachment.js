@@ -13,6 +13,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      fileURL: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       fileType: Sequelize.STRING,
       uploadDate: {
         type: Sequelize.DATE,
