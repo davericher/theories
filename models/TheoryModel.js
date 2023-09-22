@@ -4,11 +4,30 @@ class Theory extends Model {
   static associate(models) {
     // Relationships
     this.belongsTo(models.User, { foreignKey: 'userId', as: 'proposer' });
+    this.hasMany(models.Comment, { foreignKey: 'theoryId', as: 'comments' });
+    this.belongsToMany(models.Tag, {
+      through: 'TheoryTag',
+      foreignKey: 'theoryId',
+    });
+    this.belongsToMany(models.Discipline, {
+      through: 'TheoryDiscipline',
+      foreignKey: 'theoryId',
+    });
+    this.hasMany(models.VersionHistory, {
+      foreignKey: 'theoryId',
+      as: 'versions',
+    });
+
+    // New relationships
     this.hasMany(models.Evidence, {
       foreignKey: 'supportsTheory',
-      as: 'evidences',
+      as: 'supportingEvidences',
     });
-    this.hasMany(models.Comment, { foreignKey: 'theoryId', as: 'comments' });
+    this.hasMany(models.Critique, {
+      foreignKey: 'againstTheory',
+      as: 'critiquesAgainst',
+    });
+    this.hasMany(models.Citation, { foreignKey: 'theoryId', as: 'citations' });
   }
 
   // Basic CRUD (These are inherent in Sequelize, but I'm listing them for clarity)

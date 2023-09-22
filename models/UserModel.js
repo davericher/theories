@@ -1,4 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
+const useBcrypt = require('sequelize-bcrypt');
 
 class User extends Model {
   static associate(models) {
@@ -150,6 +151,13 @@ module.exports = (sequelize) => {
       deletedAt: 'deleted_at',
     },
   );
+
+  // Use Bcrypt to hash passwords
+  useBcrypt(User, {
+    field: 'password', // secret field to hash, default: 'password'
+    rounds: 12, // used to generate bcrypt salt, default: 12
+    compare: 'authenticate', // method used to compare secrets, default: 'authenticate'
+  });
 
   return User;
 };

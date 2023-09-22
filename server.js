@@ -7,8 +7,6 @@ const db = require('./models'); // Importing the Sequelize models
 
 require('dotenv').config();
 
-console.log(process.env.PORT); // Outputs: 3000 (from the .env file)
-
 // Create an instance of an Express app
 const app = express();
 
@@ -29,6 +27,7 @@ const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // limit each IP to 100 requests per windowMs
 });
+
 app.use(limiter);
 
 // Sample route
@@ -43,9 +42,31 @@ app.use((err, req, res) => {
 });
 
 // Sync the database models and then start the server
-db.sequelize.sync().then(() => {
+
+const startDatabase = async () => {
+  await db.sequelize.sync();
+};
+
+/**
+ * Starts the web server
+ * @returns {Promise<void>}
+ */
+const startWebServer = async () => {
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
+};
+
+/**
+ * Starts the application
+ * @returns {Promise<void>}
+ */
+const startApplication = async () => {
+  await startDatabase();
+  await startWebServer();
+};
+
+startApplication().catch((err) => {
+  console.error(err);
 });
